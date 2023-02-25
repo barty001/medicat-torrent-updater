@@ -12,7 +12,7 @@ then
 fi
 
 source venv/bin/activate
-pip install -r ./requirements.txt
+pip install -U -r ./requirements.txt
 
 python3 "${SCRIPTDIR}/main.py"
 
