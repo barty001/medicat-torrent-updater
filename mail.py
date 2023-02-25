@@ -24,16 +24,13 @@ def send_notification(
 
     msg = EmailMessage()
     msg.set_content(f"""
+<!doctype html>
 <html>
-<head><style>
-    table, th, td {{
-    padding: 3px; border: 1px solid black; border-collapse: collapse;
-    }}
-</style></head>
+<head></head>
 <body>
 <p><b>Hallo!</b></p>
 <p>
-Medicat wurde von <pre>{medicat_old_version}</pre> auf Version <pre>{medicat_version}</pre> aktualisiert!<br/>
+Medicat wurde von <code>{medicat_old_version}</code> auf Version <code>{medicat_version}</code> aktualisiert!<br/>
 Die neue Version wurde zu qBittorrent hinzugefügt, läd nun herunter und wird in Kürze geseedet.
 </p>
 <p>
@@ -46,7 +43,8 @@ In qBittorrent sind nun folgende Versionen enthalten:
 
 <p>MfG,<br/>
 ~ {sender_displayname}!</p>
-    """, subtype="html")
+</body>
+</html>""", subtype="html")
 
     msg['Subject'] = f'Medicat Update {medicat_old_version} -> {medicat_version}'
     msg['From'] = f'"{sender_displayname}" <{sender_address}>'

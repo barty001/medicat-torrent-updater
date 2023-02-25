@@ -69,6 +69,7 @@ def sizeof_fmt(num, suffix="B"):
 
 
 def get_medicat_torrent_status_html(qbt_client: qbittorrentapi.Client) -> str:
+    table_style = "padding: 3px; border: 1px solid black; border-collapse: collapse;"
     table_headers = ["Name", "Size", "State", "Ratio", "Amount Uploaded", "Seeds", "Leechs"]
     torrent_data = []
 
@@ -78,7 +79,14 @@ def get_medicat_torrent_status_html(qbt_client: qbittorrentapi.Client) -> str:
                 [torrent.name, sizeof_fmt(torrent.size), torrent.state, torrent.ratio, sizeof_fmt(torrent.uploaded),
                  torrent.num_complete, f"{torrent.num_leechs} ({torrent.num_incomplete} total)"])
 
-    return tabulate.tabulate(torrent_data, headers=table_headers, tablefmt="html")
+    table_html = tabulate.tabulate(torrent_data, headers=table_headers, tablefmt="html")
+    # Ew, ich hasse HTML-E-Mails
+    return table_html \
+        .replace("<table>", f"<table style=\"{table_style}\">") \
+        .replace("<th style=\"", f"<th style=\"{table_style}") \
+        .replace("<th>", f"<th style=\"{table_style}\">") \
+        .replace("<td style=\"", f"<td style=\"{table_style}") \
+        .replace("<td>", f"<td style=\"{table_style}\">")
 
 
 if __name__ == '__main__':
