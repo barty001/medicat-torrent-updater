@@ -6,9 +6,6 @@ cd "${SCRIPTDIR}"
 (echo -n "---- Running at: "
 date --iso-8601=seconds
 
-echo foo >>/dev/stderr
-
-
 if ! [[ -d "${SCRIPTDIR}/venv" ]]
 then
   python3 -m venv venv
