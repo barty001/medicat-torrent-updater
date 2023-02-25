@@ -1,0 +1,12 @@
+# Python virtualenv
+/venv
+
+# The configuration file (sensitive contents)
+/config.json
+
+# All generated temporary files
+*.html
+*.log
+
+# PyCharm config
+/.idea
